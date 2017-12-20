@@ -5,8 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore;
+using CheeseMVC;
 
-namespace CheeseMVC
+namespace AspNetCoreDotNetCore2App
 {
     public class Program
     {

@@ -32,11 +32,12 @@ namespace CheeseMVC.ViewModels
             {
                 Categories.Add(new SelectListItem
                 {
-                    Value = CategoryID.ToString(),
-                    Text = Name
+                    Value = category.ID.ToString(),
+                    Text = category.Name
                 });
 
             }
+            this.Categories = Categories;
         }
         
         public AddCheeseViewModel() { }
