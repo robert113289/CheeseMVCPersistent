@@ -33,42 +33,53 @@ namespace CheeseMVC.ViewModels
 
             Cheeses = new List<SelectListItem>();
 
-            // adds all cheeses to cheeses selectlist
             foreach (var cheese in cheeses)
             {
-                foreach (var cheeseMenu in cheese.CheeseMenu)
+                if (CheeseIsAvailable(cheese, menu.ID))
                 {
-                    if(cheeseMenu.MenuID != menu.ID)
+                    Cheeses.Add(new SelectListItem
                     {
-                        Cheeses.Add(new SelectListItem
-                        {
-                            Value = cheese.ID.ToString(),
-                            Text = cheese.Name
-                        });
-                    }
+                        Value = cheese.ID.ToString(),
+                        Text = cheese.Name
+                    });
                 }
             }
+        }
 
+        private bool CheeseIsAvailable(Cheese cheese, int id)
+        {
+            bool unique = true;
+
+            foreach (var cheeseMenu in cheese.CheeseMenu)
+            {
+                if (cheeseMenu.MenuID == id)
+                {
+                    unique = false;
+                    break;
+                }
+            } 
+
+            return unique;
         }
 
 
         //navigate throght cheese objects in cheeses list
-            /*foreach (var cheese in cheeses)
+        /*foreach (var cheese in cheeses)
+        {
+            //navigate through the CheeseMenu property of the cheese objects in cheeses
+            foreach (var menus in cheese.CheeseMenu)
             {
-                //navigate through the CheeseMenu property of the cheese objects in cheeses
-                foreach (var menus in cheese.CheeseMenu)
+                //add only the cheeses that arent already on the menu
+                if (menus.MenuID != menu.ID)
                 {
-                    //add only the cheeses that arent already on the menu
-                    if (menus.MenuID != menu.ID)
+                    Cheeses.Add(new SelectListItem
                     {
-                        Cheeses.Add(new SelectListItem
-                        {
-                            Value = cheese.ID.ToString(),
-                            Text = cheese.Name
-    });
-                    }
+                        Value = cheese.ID.ToString(),
+                        Text = cheese.Name
+});
                 }
-        }*/
+            }
+    }*/
 
     }
 
