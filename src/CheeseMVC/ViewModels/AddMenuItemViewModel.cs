@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CheeseMVC.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace CheeseMVC.ViewModels
 {
@@ -35,11 +36,17 @@ namespace CheeseMVC.ViewModels
             // adds all cheeses to cheeses selectlist
             foreach (var cheese in cheeses)
             {
-                Cheeses.Add(new SelectListItem
+                foreach (var cheeseMenu in cheese.CheeseMenu)
                 {
-                    Value = cheese.ID.ToString(),
-                    Text = cheese.Name
-                });
+                    if(cheeseMenu.MenuID != menu.ID)
+                    {
+                        Cheeses.Add(new SelectListItem
+                        {
+                            Value = cheese.ID.ToString(),
+                            Text = cheese.Name
+                        });
+                    }
+                }
             }
 
         }
