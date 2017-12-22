@@ -14,11 +14,10 @@ namespace CheeseMVC.ViewModels
         [Display(Name = "Cheese")]
         public int CheeseID { get; set; }
         
+        
         [Required]
         [Display(Name = "Menu")]
         public int MenuID { get; set; }
-
-        [Required(ErrorMessage = "Dont mess with the process buddy")]
         public Menu Menu { get; set; }
 
         public List<SelectListItem> Cheeses { get; set; }
@@ -29,11 +28,25 @@ namespace CheeseMVC.ViewModels
         public AddMenuItemViewModel(Menu menu,IEnumerable<Cheese> cheeses)
         {
             this.Menu = menu;
+            this.MenuID = menu.ID;
 
             Cheeses = new List<SelectListItem>();
 
-            //navigate throght cheese objects in cheeses list
+            // adds all cheeses to cheeses selectlist
             foreach (var cheese in cheeses)
+            {
+                Cheeses.Add(new SelectListItem
+                {
+                    Value = cheese.ID.ToString(),
+                    Text = cheese.Name
+                });
+            }
+
+        }
+
+
+        //navigate throght cheese objects in cheeses list
+            /*foreach (var cheese in cheeses)
             {
                 //navigate through the CheeseMenu property of the cheese objects in cheeses
                 foreach (var menus in cheese.CheeseMenu)
@@ -45,21 +58,10 @@ namespace CheeseMVC.ViewModels
                         {
                             Value = cheese.ID.ToString(),
                             Text = cheese.Name
-                        });
+    });
                     }
                 }
-            }
-            // adds all cheeses to cheeses selectlist
-            /*foreach( var cheese in cheeses)
-            {
-                Cheeses.Add(new SelectListItem
-                {
-                    Value = cheese.ID.ToString(),
-                    Text = cheese.Name
-                });
-            }*/
-
-        }
+        }*/
 
     }
 
